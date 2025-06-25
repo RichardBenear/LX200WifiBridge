@@ -362,8 +362,8 @@ void loop() {
     String wdStaIpMsg = processLX200Command(":GI#");
     Serial.print("wdStaIpMsg = "); Serial.println(wdStaIpMsg);
 
-    // Only proceed if it ends with '#'
-    if (wdStaIpMsg.endsWith("#")) {
+    // Only proceed if it is long enough and ends with '#'
+    if (wdStaIpMsg.length() > 1 && wdStaIpMsg.endsWith("#")) {
       wdStaIpMsg.remove(wdStaIpMsg.length() - 1); // remove trailing '#'
       wdStaIpMsg.trim();                          // remove newline/whitespace
 

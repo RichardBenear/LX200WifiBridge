@@ -356,14 +356,14 @@ void loop() {
   yield();
 
   // Check for the IP Address of the Wifi Display ESP32 and display it on the OLED
-  if (!wifiIpReceived && millis() - lastWifiIpCheck >= 5000) {
+  if (!wifiIpReceived && millis() - lastWifiIpCheck >= 15000) {
     lastWifiIpCheck = millis();
     
     String wdStaIpMsg = processLX200Command(":GI#");
     Serial.print("wdStaIpMsg = "); Serial.println(wdStaIpMsg);
 
     // Only proceed if it is long enough and ends with '#'
-    if (wdStaIpMsg.length() > 1 && wdStaIpMsg.endsWith("#")) {
+    if (wdStaIpMsg.length() > 4 && wdStaIpMsg.endsWith("#")) {
       wdStaIpMsg.remove(wdStaIpMsg.length() - 1); // remove trailing '#'
       wdStaIpMsg.trim();                          // remove newline/whitespace
 

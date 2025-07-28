@@ -73,7 +73,7 @@ bool isNoResponseCommand(const String &cmd) {
 
 // Check for LX200 commands that are Specific to this App
 String checkForAppSpecificCmds(const String &cmd) {
-  if (cmd == ":GVP#")  return "OnStepX.DDScopeX#"; // Product Name
+  if (cmd == ":GVP#")  return "On-Step#";//"OnStepX.DDScopeX#"; // Product Name
   if (cmd == ":GVN#")  return "2.0#";        // Firmware Version
   if (cmd == ":GVD#")  return "May 2025#";   // Firmware Date
   if (cmd == ":GVT#")  return "08:02:00#";   // Telescope Firmware time
@@ -150,7 +150,7 @@ String readTeensyResponse() {
 
   // Read until '#' is received or timeout
   unsigned long readStart = millis();
-  while ((millis() - readStart) < 350) {
+  while ((millis() - readStart) < 450) {
     while (SERIAL_TEENSY.available()) {
       char rc = SERIAL_TEENSY.read();
 
@@ -240,7 +240,7 @@ void handleLX200Client() {
         String response = processLX200Command(lx200Cmd);
 
          // Remove hash from bool responses
-        if (response == "1#" || response == "0#") {
+        if ((response == "1#" || response == "0#") && lx200Cmd != ":MS#") {
           response = response.substring(0, 1);
         }
 
@@ -249,7 +249,7 @@ void handleLX200Client() {
         // followed by the client sending another command and the while loop must         
         // get ready for next command quickly or misses the command. (e.g. :GD#)
         if (isNoResponseCommand(lx200Cmd)) {
-          //SERIAL_DEBUG.printf("Skipping response for: %s\n", lx200Cmd.c_str());
+          SERIAL_DEBUG.printf("Skipping response for: %s\n", lx200Cmd.c_str());
           break;
         }
 

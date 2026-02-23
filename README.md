@@ -66,4 +66,9 @@ This project requires the compatible version of DDScopeX which has the LX200 Han
 | `include/secretsTemplate.h` | Example secrets file for users           |
 | `src/OledDisplay.*`         | OLED display handling (I2C, optional)    |
 
+## Book: BUILD A DIRECT DRIVE TELESCOPE: A Comprehensive Guide
+Book Available on Amazon [Here](https://a.co/d/0cUrQWGB) 
+
+<img src="./DDScopeXBookFront.jpg" width="300" alt="DDScopeX Book Front">
+
 ---
